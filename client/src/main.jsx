@@ -11,6 +11,7 @@ import User from './components/User/User.jsx';
 import Github, { githubInfoLoader } from './components/Github/Github.jsx';
 import ShowCard from './components/showcard/ShowCard.jsx';
 import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
+import Cart from './components/Cart/Cart.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
           element={<Github />}
           loader={githubInfoLoader}
         />
+        <Route path='cart' element={<Cart />} />
       </Route>
       <Route path='*' element={<ErrorPage />} />
     </>
