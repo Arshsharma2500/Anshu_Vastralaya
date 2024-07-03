@@ -5,7 +5,7 @@ function ButtonErro() {
     <div>
       <div class="buttons">
   <button class="blob-btn">
-    Blob Button
+    Back To Home!
     <span class="blob-btn__inner">
       <span class="blob-btn__blobs">
         <span class="blob-btn__blob"></span>

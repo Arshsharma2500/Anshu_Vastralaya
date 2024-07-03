@@ -25,20 +25,27 @@ export default function Home() {
   return (
     <div className='mx-auto max-w-7xl'>
       <div className="flex flex-row justify-between p-8">
+
         <aside className="w-1/2">
-          <img className='w-full' src={shoppingimg} alt="Shopping" />
+          <img className='w-full' 
+          src={shoppingimg} 
+          alt="Shopping" />
         </aside>
+
         <aside className='w-2/6 h-max p-4 border rounded-lg shadow-2xl shadow-slate-800 bg-gray-500 bg-opacity-20'>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis repellendus eum fugit laborum harum dolorum sunt amet, totam quos consectetur dignissimos cum quae accusantium quia, molestias quod, quo tenetur sint earum? Itaque, possimus recusandae.
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem, natus et ratione quo in ipsum repudiandae vero eius quis modi consequatur quos libero expedita necessitatibus, dolores minima autem dicta architecto odit voluptatem tenetur maxime?
         </aside>
+
       </div>
 
         {/* cards */}
 
       <div className={`p-8 flex flex-wrap justify-between gap-y-6 gap-1 ${showCard ? 'blur-sm' : ''}`}>
         {[...Array(8)].map((_, index) => (
-          <div key={index} className='relative' onClick={() => handleClick(<Card img={img} title={title} price={price} />)}>
+          <div key={index} 
+          className='relative' 
+          onClick={() => handleClick(<Card img={img} title={title} price={price} />)}>
             <Card img={img} title={title} price={price} />
           </div>
         ))}

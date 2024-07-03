@@ -60,6 +60,7 @@ const Slideshow = () => {
 
   return (
     <div className="slideshow-container relative max-w-[1000px] bg-green-600 w-max">
+
       {slides.map((slide, index) => (
         <div
           key={index}
@@ -95,6 +96,7 @@ const Slideshow = () => {
           ></span>
         ))}
       </div>
+      
     </div>
   );
 };

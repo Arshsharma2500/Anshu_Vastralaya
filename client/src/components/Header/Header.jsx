@@ -1,9 +1,27 @@
-import React from 'react'
-import {Link,NavLink} from 'react-router-dom'
+import React, { useState } from 'react'
+import {Link,NavLink, useNavigate} from 'react-router-dom'
 import Logo from '../../assets/logo.png'
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import ProfileInfo from '../ProfileInfo/ProfileInfo';
+import SearchBar from '../SearchBar/SearchBar';
 
 export default function Header() {
+
+    const [searchcategory,setSearchCategory] = useState("");
+
+    const navigate = useNavigate;
+
+    const onLogout = () => {
+        navigate("/login");
+    }
+
+    const handleSearch = () => {
+
+    };
+
+    const onClearSearch = () => {
+        setSearchCategory("");
+    }
     return (
         <header className="shadow sticky z-50 top-0">
             <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 bg-opacity-50">
@@ -15,19 +33,26 @@ export default function Header() {
                             alt="Logo"
                         />
                     </Link>
-                    <div className="flex items-center lg:order-2">
+
+                    <div className="flex items-center lg:order-2 gap-1">
+                        {/* searchbar */}
+                        <SearchBar 
+                            value={searchcategory}
+                            onChange={({target}) => {
+                                setSearchCategory(target.value);
+                            }}
+                            handleSearch={handleSearch}
+                            onClearSearch={onClearSearch}
+                        />
+
                         <Link
                             to="cart"
                             className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
                         >
                             <AiOutlineShoppingCart style={{ fontSize: '24px'}}/>
                         </Link>
-                        <Link
-                            to="#"
-                            className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-                        >
-                            Get started
-                        </Link>
+                        <ProfileInfo onLogout={onLogout}/>
+                        
                     </div>
                     <div
                         className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"

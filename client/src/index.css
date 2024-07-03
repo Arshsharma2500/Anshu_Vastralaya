@@ -138,3 +138,7 @@
         transform: translateZ(0) scale(1.4);
     }
 }
+
+.input-box{
+    @apply w-full border p-2 rounded
+}
