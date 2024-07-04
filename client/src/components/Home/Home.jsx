@@ -8,6 +8,7 @@ export default function Home() {
   const img = `https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/k/1/u/40-pmsx17447-e5-park-avenue-original-imagz7q7fzga8tcd.jpeg?q=70`;
   const title = "shirt_1";
   const price = 2299;
+  const description = "25% discount";
 
   const [showCard, setShowCard] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -45,8 +46,8 @@ export default function Home() {
         {[...Array(8)].map((_, index) => (
           <div key={index} 
           className='relative' 
-          onClick={() => handleClick(<Card img={img} title={title} price={price} />)}>
-            <Card img={img} title={title} price={price} />
+          onClick={() => handleClick(<Card img={img} title={title} price={price} description={description}/>)}>
+            <Card img={img} title={title} price={price} description={description}/>
           </div>
         ))}
       </div>
