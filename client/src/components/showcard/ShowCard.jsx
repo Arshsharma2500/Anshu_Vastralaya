@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import CartItem from '../Cart/CartItem';
 
-const ShowCard = ({ onClose, card }) => {
+const ShowCard = ({onClose, card, img, title, price}) => {
+
+  // card for CartItem
+  const[selecteditem, setSelectedItem] = useState(null);
+
   const cardRef = useRef(null);
   const [selectedValue, setSelectedValue] = useState('S'); // State for radio button selection
 
@@ -20,6 +25,17 @@ const ShowCard = ({ onClose, card }) => {
   const handleChange = (e) => {
     setSelectedValue(e.target.value);
   };
+
+  // card for CartItem
+  let item = {
+    img : img,
+    title : title,
+    price : price,
+  }
+  const handleonClick = () => {
+    // setSelectedItem(item);
+    console.log("working");
+  }
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50">
@@ -95,7 +111,10 @@ const ShowCard = ({ onClose, card }) => {
           </div>
         </form>
 
-        <button className='text-center w-full py-2 bg-orange-700 text-white rounded-md active:bg-orange-800'>
+        <button className='text-center w-full py-2 bg-orange-700 text-white rounded-md active:bg-orange-800'
+        onClick={() => {<CartItem img = {item.img} title = {item.title} price = {item.price} /> ,
+        console.log("data sended successfully")}}
+        >
           Add to Cart
         </button>
       </div>

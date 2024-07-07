@@ -52,7 +52,7 @@ export default function Home() {
         ))}
       </div>
 
-      {showCard && <ShowCard onClose={handleClose} card={selectedCard} />}
+      {showCard && <ShowCard onClose={handleClose} card={selectedCard} img={img} title={title} price={price} />}
     </div>
   );
 }
