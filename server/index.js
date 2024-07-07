@@ -15,39 +15,6 @@ const Cloth = require("./models/cloths.model");
 const express = require("express");
 const cors = require("cors");
 const app = express();
-
-// upload image on server (multer)
-const storage = multer.diskStorage({
-    destination: './uploads/',
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-    }
-});
-
-const upload = multer({
-    storage: storage,
-    limits: { fileSize: 1000000 }, // Limit file size to 1MB
-    fileFilter: function (req, file, cb) {
-        checkFileType(file, cb);
-    }
-}).single('img'); // 'img' is the field name for the file input
-
-// Check file type
-function checkFileType(file, cb) {
-    // Allowed ext
-    const filetypes = /jpeg|jpg|png|gif/;
-    // Check ext
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    // Check mime
-    const mimetype = filetypes.test(file.mimetype);
-
-    if (mimetype && extname) {
-        return cb(null, true);
-    } else {
-        cb('Error: Images Only!');
-    }
-}
-
 const jwt = require("jsonwebtoken");
 const { authenticateToken } = require("./utilities");
 const { error } = require("console");
@@ -210,27 +177,6 @@ app.get("/get-clothes/", authenticateToken, async(req,res) => {
     }
 });
 
-// Route to upload an image and create a new cloth document
-app.post('/upload', (req, res) => {
-    upload(req, res, (err) => {
-        if (err) {
-            res.status(400).send(err);
-        } else {
-            if (req.file == undefined) {
-                res.status(400).send('Error: No File Selected!');
-            } else {
-                const newCloth = new Cloth({
-                    img: `/uploads/${req.file.filename}`,
-                    title: req.body.title
-                });
-
-                newCloth.save()
-                    .then(() => res.send('File Uploaded and Cloth Saved!'))
-                    .catch(err => res.status(500).send(err));
-            }
-        }
-    });
-});
 
 app.listen(8000);
 
