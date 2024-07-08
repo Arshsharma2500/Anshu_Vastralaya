@@ -13,7 +13,16 @@ function Cart() {
           <div className='bg-gray-200 w-2/3 p-8 flex flex-col gap-4'>
   
             <img src={Logo} className='w-16 rounded'></img>
-            <h2 className='font-serif text-xl font-medium'>Shopping cart</h2>
+            <div className='flex flex-row w-full gap-28'>
+              <h2 className='font-serif text-xl font-medium w-1/4'>Shopping cart</h2>
+              <div className='flex flex-wrap justify-between w-3/4 font-serif'>
+                <p>Size</p>
+                <p>Color</p>
+                <p>Price</p>
+                <p>Quantity</p>
+                <p>Total</p>
+              </div>
+            </div>
             <CartItem />
             <CartItem />
             <CartItem />
