@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Logo from '../../assets/logo.png'
 import CartItem from './CartItem'
+import Summary from './Summary'
 
 function Cart() {
 
@@ -30,7 +31,10 @@ function Cart() {
           </div>
 
           <div className='bg-gray-300 w-1/3 p-4'>
-                <h2>Summary</h2>
+            <div className='bg-gray-300 p-8 flex flex-col gap-4'>
+              <h2 className='font-serif text-xl font-medium w-1/4'>Summary</h2>
+              <Summary />
+            </div>
           </div>
 
         </div> 
