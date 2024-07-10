@@ -8,7 +8,7 @@
     padding: 0;
 }
 
-/* button style */
+/* button style for error page */
 
 .buttons {
     margin-top: 50px;
@@ -17,6 +17,18 @@
     position: absolute;
     top: 70vh;
     left: 65%;
+}
+
+/* button style for back to shop  */
+
+.buttons2 {
+    /* margin-top: 50px; */
+    text-align: center;
+    border-radius: 30px;
+    position: absolute;
+    top: 105vh;
+    /* bottom: 10vh; */
+    left: 7%;
 }
 
 .blob-btn {
@@ -142,3 +154,59 @@
 .input-box{
     @apply w-full border p-2 rounded
 }
+
+
+/* proceed to pay button style  */
+
+.btn-one {
+    color: rgb(194 65 12);
+    transition: all 0.3s;
+    position: relative;
+    padding: 1vh;
+  }
+  .btn-one span {
+    transition: all 0.3s;
+  }
+  .btn-one::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-top-color: rgb(194 65 12);
+    border-bottom-color: rgb(194 65 12);
+    transform: scale(0.1, 1);
+  }
+  .btn-one:hover span {
+    letter-spacing: 2px;
+  }
+  .btn-one:hover::before {
+    opacity: 1; 
+    transform: scale(1, 1); 
+  }
+  .btn-one::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: all 0.3s;
+    background-color: rgba(255, 255, 255, 0.326);
+    border-radius: 5px;
+  }
+  .btn-one:hover::after {
+    opacity: 0; 
+    transform: scale(0.1, 1);
+  }
+  
+  
