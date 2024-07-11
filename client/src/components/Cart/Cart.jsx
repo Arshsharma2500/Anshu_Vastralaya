@@ -4,6 +4,7 @@ import CartItem from './CartItem'
 import Summary from './Summary'
 import { GoArrowLeft } from "react-icons/go";
 import BackToShop from "./BackToShop.jsx";
+import {Link} from "react-router-dom";
 
 function Cart() {
 
@@ -32,7 +33,7 @@ function Cart() {
 
             {/* back button  */}
             
-            <BackToShop/>
+            <Link to={"/"} ><BackToShop/></Link>
 
           </div>
 
