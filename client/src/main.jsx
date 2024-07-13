@@ -14,6 +14,7 @@ import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
 import Cart from './components/Cart/Cart.jsx';
 import Login from './pages/Login/Login.jsx';
 import SignUp from './pages/Signup/SignUp.jsx';
+import Payement from './components/payment/Payement.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
         <Route path='contact' element={<Contact />} />
         <Route path='user/:userid' element={<User />} />
         <Route path='showcard' element={<ShowCard />} />
+        <Route path='payement' element={<Payement />} />
         <Route
           path='github'
           element={<Github />}
@@ -34,6 +36,7 @@ const router = createBrowserRouter(
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<SignUp />} />
       <Route path='*' element={<ErrorPage />} />
+      
     </>
   )
 );

@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 function Summary() {
   return (
@@ -40,7 +41,7 @@ function Summary() {
         </div>
 
         {/* proceed to pay button  */}
-        <button className='mt-4'>
+        <button onClick={() => {window.location.href ="payement"}} className='mt-4'>
           <div class="box-1 active:bg-slate-300">
             <div class="btn btn-one text-center">
               <span>Proceed To Pay</span>
