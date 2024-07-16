@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const multer = require('multer');
 const path = require('path');
 
-mongoose.connect(config.connectionstring);
+mongoose.connect(config.connectionstring); 
 
 const User = require("./models/user.model");
 const Cloth = require("./models/cloths.model");
@@ -115,6 +115,36 @@ app.post("/login", async(req,res) => {
         });
     }
 })
+
+//Get User
+app.get("/get-user", authenticateToken, async (req, res) => {
+    if (!req.user) {
+        return res.sendStatus(401); // Just in case req.user is not set
+    }
+
+    const { user } = req;
+    try {
+        const isUser = await User.findOne({ userId: user._id });
+
+        if (!isUser) {
+            return res.sendStatus(401);
+        }
+
+        return res.json({
+            user: {
+                fullName: isUser.fullName,
+                email: isUser.email,
+                _id: isUser._id,
+                createdOn: isUser.createdOn
+            },
+            message: "",
+        });
+    } catch (error) {
+        console.error('Database query failed', error);
+        return res.sendStatus(500); // Internal Server Error
+    }
+});
+
 
 //Add cloth
 app.post("/add-cloth",authenticateToken, async(req,res) => {

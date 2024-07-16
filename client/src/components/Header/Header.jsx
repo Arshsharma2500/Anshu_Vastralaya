@@ -1,27 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Link,NavLink, useNavigate} from 'react-router-dom'
 import Logo from '../../assets/logo.png'
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import ProfileInfo from '../ProfileInfo/ProfileInfo';
 import SearchBar from '../SearchBar/SearchBar';
 
-export default function Header() {
 
-    const [searchcategory,setSearchCategory] = useState("");
+export default function Header({ userInfo = null }) {
 
-    const navigate = useNavigate;
+    const [searchcategory, setSearchCategory] = useState("");
+
+    const navigate = useNavigate();
 
     const onLogout = () => {
+        localStorage.clear();
         navigate("/login");
-    }
-
-    const handleSearch = () => {
-
     };
+
+    const handleSearch = () => {};
 
     const onClearSearch = () => {
         setSearchCategory("");
-    }
+    };
+    
+
+
     return (
         <header className="shadow sticky z-50 top-0">
             <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 bg-opacity-50">
@@ -51,7 +54,8 @@ export default function Header() {
                         >
                             <AiOutlineShoppingCart style={{ fontSize: '24px'}}/>
                         </Link>
-                        <ProfileInfo onLogout={onLogout}/>
+                        <ProfileInfo userInfo={userInfo} onLogout={onLogout} />
+                        
                         
                     </div>
                     <div
