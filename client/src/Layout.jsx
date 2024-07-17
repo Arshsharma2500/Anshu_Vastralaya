@@ -17,7 +17,7 @@ function Layout() {
             if(response.data && response.data.user){
                 setUserInfo(response.data.user);
 
-                console.log(userInfo.fullName);
+                // console.log(userInfo.fullName);
             }
         }
         catch (error){
@@ -26,7 +26,10 @@ function Layout() {
                 navigate("/login");
             }
         }
+        
     };
+
+    
 
     useEffect(()=>{
         getUserInfo();

@@ -12,9 +12,18 @@ function Github() {
     //     })
     // })
   return (
-    <div className='text-center bg-gray-900 bg-opacity-70 text-white text-3xl mx-auto max-w-screen-xl p-4'>
-        Github follower : {data.followers}
-     <img src={data.avatar_url} alt='Git picture' width={250}/>
+    <div className=' bg-gray-900 bg-opacity-70 text-white text-3xl mx-auto max-w-screen-xl p-4 flex flex-wrap gap-10'>
+
+      <img src={data.avatar_url} alt='Git picture' width={250}/>
+
+      <div className='flex flex-col gap-5'>
+        <p>GitHub UserName : {data.login}</p>
+
+        <a href='https://github.com/Arshsharma2500'>
+        <p>Profile Link : https://github.com/Arshsharma2500</p>
+        </a>
+      </div> 
+
     </div>
     
   )

@@ -118,31 +118,19 @@ app.post("/login", async(req,res) => {
 
 //Get User
 app.get("/get-user", authenticateToken, async (req, res) => {
-    if (!req.user) {
-        return res.sendStatus(401); // Just in case req.user is not set
+
+    const { user } = req.user;
+
+    const isUser = await User.findOne({_id: user._id});
+
+    if(!isUser){
+        return res.sendStatus(401);
     }
-
-    const { user } = req;
-    try {
-        const isUser = await User.findOne({ userId: user._id });
-
-        if (!isUser) {
-            return res.sendStatus(401);
-        }
-
-        return res.json({
-            user: {
-                fullName: isUser.fullName,
-                email: isUser.email,
-                _id: isUser._id,
-                createdOn: isUser.createdOn
-            },
-            message: "",
-        });
-    } catch (error) {
-        console.error('Database query failed', error);
-        return res.sendStatus(500); // Internal Server Error
-    }
+    return res.json({
+        user: isUser,
+        message: "",
+    });
+    
 });
 
 
