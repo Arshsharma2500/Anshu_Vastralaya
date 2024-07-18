@@ -3,6 +3,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import PasswordInput from '../../components/Input/PasswordInput'
 import { validateEmail } from '../../utils/Helper';
 import axiosInstance from '../../utils/AxiosInstance';
+import backgroundimg from '../../assets/backgroundimg.svg';
 function Login() {
 
     const [email,setEmail] = useState("");
@@ -48,48 +49,75 @@ function Login() {
     }
 
 };
+
+// style for background
+const style = {
+    backgroundImage: `url(${backgroundimg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '80vh', // Adjust as needed
+    width: '80%',
+  };
+
+  const InputStyle = {
+    backgroundColor: 'rgba(1, 1, 1, 0.01)',
+    border: 'none',
+    borderBottom: 'solid white thin',
+    borderLeft: 'none',
+    color: 'white',
+    borderRadius: 'none'
+  };
     
 
   return (
     <>
-        <div className='flex justify-center items-center h-screen'>
-            <div className='flex flex-col gap-4 p-4 border rounded w-1/4'>
+        <div className='flex justify-center items-center h-screen bg-gray-300'>
+            <div style={style} className='rounded-2xl shadow-2xl shadow-black'>
+                <div className='flex flex-col gap-4 p-4 w-1/3
+                relative top-1/4 left-2/4 text-center'>
 
-                <h1 className='text-xl font-semibold'>
-                Login
-                </h1>
-
-                <form 
-                className='flex flex-col gap-4'
-                onSubmit={handleLogin} >
-
-                    <input type='text' 
-                    placeholder='Email' 
-                    className='input-box'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)} />
-
-                    <PasswordInput
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)} />
-                    
-                    {/* if error than print  */}
-                    {error && <p className='text-red-500 pb-1 text-md'>{error}</p>}
-
-                    <button type='submit' 
-                    className="bg-blue-600 p-2 rounded text-white active:bg-blue-700">
+                    <h1 className='text-xl font-semibold'>
                     Login
-                    </button>
+                    </h1>
 
-                    <p>Not resgister yet?{" "}
-                        <Link to={"/signup"} 
-                        className='text-blue-600 underline'>
-                        Create an Account
-                        </Link>
-                    </p>
+                    <form 
+                    className='flex flex-col gap-3'
+                    onSubmit={handleLogin} >
 
-                </form>
+                        
+                        <label className='text-left font-serif'>Email</label>
 
+                        <input type='text' 
+                        placeholder='Email' 
+                        className='input-box text-white font-serif'
+                        style={InputStyle}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)} />
+
+                        <label className='text-left font-serif'>Password</label>
+
+                        <PasswordInput
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)} />
+                        
+                        {/* if error than print  */}
+                        {error && <p className='text-red-500 pb-1 text-md'>{error}</p>}
+
+                        <button type='submit' 
+                        className="bg-orange-700 p-2 rounded text-white active:bg-orange-800">
+                        Login
+                        </button>
+
+                        <p>Not resgister yet?{" "}
+                            <Link to={"/signup"} 
+                            className='text-orange-600 underline'>
+                            Create an Account
+                            </Link>
+                        </p>
+
+                    </form>
+
+                </div>
             </div>
         </div>
     </>

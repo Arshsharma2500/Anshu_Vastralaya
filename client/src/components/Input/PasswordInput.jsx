@@ -6,6 +6,16 @@ function PasswordInput({value, onChange, placeholder}) {
     const toggleShowPassword = () => {
         setIsPassword(!ispassword);
     }
+
+    const InputStyle = {
+      backgroundColor: 'rgba(1, 1, 1, 0.01)',
+      border: 'none',
+      borderBottom: 'solid white thin',
+      borderLeft: 'none',
+      color: 'white',
+      borderRadius: 'none'
+    };
+
   return (
     <div>
 
@@ -15,6 +25,7 @@ function PasswordInput({value, onChange, placeholder}) {
         type={ispassword ? "text" : "password"}
         placeholder={placeholder || "Password"}
         className='w-full border rounded p-2'
+        style={InputStyle}
         />
 
         {ispassword ? <FaRegEye 
