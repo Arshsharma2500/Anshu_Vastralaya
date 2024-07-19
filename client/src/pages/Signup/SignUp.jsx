@@ -3,6 +3,7 @@ import { validateEmail } from '../../utils/Helper';
 import PasswordInput from '../../components/Input/PasswordInput'
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/AxiosInstance';
+import backgroundimg from '../../assets/backgroundimg.svg';
 
 function SignUp() {
   const[name, setName] = useState("");
@@ -56,14 +57,35 @@ function SignUp() {
           setError("An unexpected error occurred. Please try again.");
       }
 
+
   }
 
   };
 
+    // style for background
+    const Style = {
+      backgroundImage: `url(${backgroundimg})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      height: '90vh', // Adjust as needed
+      width: '80%',
+    };
+
+    const InputStyle = {
+      backgroundColor: 'rgba(1, 1, 1, 0.01)',
+      border: 'none',
+      borderBottom: 'solid white thin',
+      borderLeft: 'none',
+      color: 'white',
+      borderRadius: 'none'
+    };
+
   return (
     <>
-    <div className='flex justify-center items-center h-screen'>
-            <div className='flex flex-col gap-4 p-4 border rounded w-1/4'>
+    <div className='flex justify-center items-center h-screen bg-gray-300'>
+      <div style={Style} className='rounded-2xl shadow-2xl shadow-black'>
+            <div className='flex flex-col gap-0 p-2 w-1/3
+                relative top-1/4 left-2/4 text-center'>
 
                 <h1 className='text-xl font-semibold'>
                 SignUp
@@ -73,19 +95,27 @@ function SignUp() {
                 className='flex flex-col gap-4'
                 onSubmit={handlesignup} >
 
+                    <label className='text-left font-serif'>Name</label>
+
                     <input type='text' 
                     placeholder='Name' 
                     className='input-box'
+                    style={InputStyle}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     />
 
+                    <label className='text-left font-serif'>Email</label>
+
                     <input type='text' 
                     placeholder='abc@gmail.com' 
                     className='input-box'
+                    style={InputStyle}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     />
+
+                    <label className='text-left font-serif'>Create Password</label>
 
                     <PasswordInput
                     value={password}
@@ -95,19 +125,20 @@ function SignUp() {
                     {error && <p className='text-red-500 pb-1 text-md'>{error}</p>}
 
                     <button type='submit' 
-                    className="bg-blue-600 p-2 rounded text-white active:bg-blue-700">
+                    className="bg-orange-700 p-2 rounded text-white active:bg-orange-800">
                     Create Account
                     </button>
 
                     <p>Already have account ?{" "}
                         <Link to={"/login"} 
-                        className='text-blue-600 underline'>
+                        className='text-orange-600 underline'>
                         Login
                         </Link>
                     </p>
 
                 </form>
             </div>
+          </div>
     </div>
     </>
   )
