@@ -1,14 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, createContext} from 'react'
 // import Modal from "react-modal";
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 import { Outlet, useNavigate} from 'react-router-dom'
 import axiosInstance from "./utils/AxiosInstance";
 
+export const CartContext = createContext();
+
 function Layout() {
+
+  const [cartItems, setCartItems] = useState([]);
 
   const [userInfo, setUserInfo] = useState(null);
     const navigate = useNavigate();
+
+    //add to cart
+    const addToCart = (item) => {
+      setCartItems((prevItems) => [...prevItems, item]);
+    };
 
     // Get User Info
     const getUserInfo = async () => {
@@ -37,12 +46,14 @@ function Layout() {
     },[]);
 
   return (
-    <>
     
-    <Header userInfo={userInfo}/>
-    <Outlet />
-    <Footer />
-    </>
+    <CartContext.Provider value={{cartItems, addToCart}}>
+      <Header userInfo={userInfo}/>
+      <Outlet />
+      <Footer />
+    </CartContext.Provider>
+      
+    
   )
 }
 

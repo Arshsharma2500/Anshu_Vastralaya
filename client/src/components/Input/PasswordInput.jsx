@@ -13,7 +13,7 @@ function PasswordInput({value, onChange, placeholder}) {
       borderBottom: 'solid white thin',
       borderLeft: 'none',
       color: 'white',
-      borderRadius: 'none'
+      borderRadius: 'none',
     };
 
   return (

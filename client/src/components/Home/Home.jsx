@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Slideshow from './Slidshow/Slideshow';
+import { CartContext } from '../../Layout';
 import shoppingimg from '../../assets/shoppingimg.png';
 import Card from './cardcomp/Card';
 import ShowCard from '../showcard/ShowCard';
 
 export default function Home() {
-  const img = `https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/k/1/u/40-pmsx17447-e5-park-avenue-original-imagz7q7fzga8tcd.jpeg?q=70`;
-  const title = "shirt_1";
-  const price = 2299;
-  const description = "25% discount";
+  const { addToCart } = useContext(CartContext);
+
+  // const img = `https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/k/1/u/40-pmsx17447-e5-park-avenue-original-imagz7q7fzga8tcd.jpeg?q=70`;
+  // const title = "shirt_1";
+  // const price = 2299;
+  // const description = "25% discount";
+
+  const products = [
+    { id: 1, 
+      img: `https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/k/1/u/40-pmsx17447-e5-park-avenue-original-imagz7q7fzga8tcd.jpeg?q=70`, 
+      title: 'Shirt', 
+      price: 449.00,
+      description: "25% discount"  
+    },
+    // Add more products as needed
+  ];
 
   const [showCard, setShowCard] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -43,16 +56,22 @@ export default function Home() {
         {/* cards */}
 
       <div className={`p-8 flex flex-wrap justify-between gap-y-6 gap-1 ${showCard ? 'blur-sm' : ''}`}>
-        {[...Array(8)].map((_, index) => (
-          <div key={index} 
-          className='relative' 
-          onClick={() => handleClick(<Card img={img} title={title} price={price} description={description}/>)}>
-            <Card img={img} title={title} price={price} description={description}/>
-          </div>
-        ))}
+      <div >
+      {products.map((product) => (
+        <div  
+        className='relative' 
+        onClick={() => handleClick(<Card img={img} title={title} price={price} description={description}/>)}>
+        <Card key={product.id} product={product} addToCart={addToCart} />
+        </div>
+      ))}
+    </div>
       </div>
+
+      
 
       {showCard && <ShowCard onClose={handleClose} card={selectedCard} img={img} title={title} price={price} />}
     </div>
+
+    
   );
 }
