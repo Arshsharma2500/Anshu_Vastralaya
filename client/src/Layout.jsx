@@ -15,8 +15,28 @@ function Layout() {
     const navigate = useNavigate();
 
     //add to cart
-    const addToCart = (item) => {
-      setCartItems((prevItems) => [...prevItems, item]);
+    const addToCart = (product) => {
+      setCartItems((prevItems) => {
+        const existingItem = prevItems.find(item => item.id === product.id);
+        if (existingItem) {
+          return prevItems.map(item => 
+            item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          );
+        }
+        return [...prevItems, { ...product, quantity: 1 }];
+      });
+    };
+    //remove from cart
+    const removeFromCart = (productId) => {
+      setCartItems((prevItems) => {
+        const existingItem = prevItems.find(item => item.id === productId);
+        if (existingItem && existingItem.quantity > 1) {
+          return prevItems.map(item => 
+            item.id === productId ? { ...item, quantity: item.quantity - 1 } : item
+          );
+        }
+        return prevItems.filter(item => item.id !== productId);
+      });
     };
 
     // Get User Info
@@ -47,7 +67,7 @@ function Layout() {
 
   return (
     
-    <CartContext.Provider value={{cartItems, addToCart}}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
       <Header userInfo={userInfo}/>
       <Outlet />
       <Footer />
