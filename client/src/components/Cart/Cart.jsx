@@ -32,7 +32,7 @@ function Cart() {
         </div>
         <div className='bg-gray-300 w-1/3 p-4'>
           <div className='bg-gray-300 p-8 flex flex-col gap-4 py-20'>
-            <h2 className='font-serif text-xl font-medium w-1/4'>Summary !</h2>
+            <h2 className='font-serif text-xl font-medium w-1/4'>Summary</h2>
             <Summary />
           </div>
         </div>

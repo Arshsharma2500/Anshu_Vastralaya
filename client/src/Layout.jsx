@@ -26,6 +26,7 @@ function Layout() {
         return [...prevItems, { ...product, quantity: 1 }];
       });
     };
+    
     //remove from cart
     const removeFromCart = (productId) => {
       setCartItems((prevItems) => {
