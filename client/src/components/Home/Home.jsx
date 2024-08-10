@@ -49,8 +49,8 @@ export default function Home() {
         </aside>
 
         <aside className='w-2/6 h-max p-4 border rounded-lg shadow-2xl shadow-slate-800 bg-gray-500 bg-opacity-20'>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis repellendus eum fugit laborum harum dolorum sunt amet, totam quos consectetur dignissimos cum quae accusantium quia, molestias quod, quo tenetur sint earum? Itaque, possimus recusandae.
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem, natus et ratione quo in ipsum repudiandae vero eius quis modi consequatur quos libero expedita necessitatibus, dolores minima autem dicta architecto odit voluptatem tenetur maxime?
+          Arsh, ipsum dolor sit amet consectetur adipisicing elit. Corporis repellendus eum fugit laborum harum dolorum sunt amet, totam quos consectetur dignissimos cum quae accusantium quia, molestias quod, quo tenetur sint earum? Itaque, possimus recusandae.
+          Arsh ipsum dolor sit, amet consectetur adipisicing elit. Rem, natus et ratione quo in ipsum repudiandae vero eius quis modi consequatur quos libero expedita necessitatibus, dolores minima autem dicta architecto odit voluptatem tenetur maxime?
         </aside>
       </div>
 
