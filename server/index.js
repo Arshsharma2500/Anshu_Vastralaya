@@ -1,13 +1,9 @@
-require("dotenv").config();
-
-console.log('Access Token Secret:', process.env.ACCESS_TOKEN_SECRET); 
-
-const config = require("./config.json");
-const mongoose = require("mongoose");
 const multer = require('multer');
 const path = require('path');
+const connectDB = require('./DataBase/db.js');
 
-mongoose.connect(config.connectionstring); 
+// connect to DataBase
+connectDB();
 
 const User = require("./models/user.model");
 const Cloth = require("./models/cloths.model");
