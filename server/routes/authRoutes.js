@@ -106,11 +106,10 @@ router.get("/get-user", authenticateToken, async (req, res) => {
 });
 
 // Add cloth route
-router.post("/add-cloth", authenticateToken, async (req, res) => {
-    const { img, title, price, description } = req.body;
-    const { user } = req.user;
-
-    if (!img) {
+router.post("/upload", authenticateToken, upload.single('file'), async (req, res) => {
+    const { title, price, description } = req.body;
+    
+    if (!req.file) {
         return res.status(400).json({ error: true, message: "Image is required" });
     }
     if (!title) {
@@ -125,11 +124,11 @@ router.post("/add-cloth", authenticateToken, async (req, res) => {
 
     try {
         const cloth = new Cloth({
-            img,
+            img: req.file.filename,
             title,
             price,
             description,
-            userId: user._id, // Use the user ID from the authenticated user
+            userId: req.user.user._id, // Use the user ID from the authenticated user
         });
 
         await cloth.save();
@@ -137,7 +136,7 @@ router.post("/add-cloth", authenticateToken, async (req, res) => {
         return res.json({
             error: false,
             cloth,
-            message: "Cloth added successfully"
+            message: "Product added successfully"
         });
     } catch (error) {
         return res.status(500).json({
@@ -168,12 +167,16 @@ router.get("/get-clothes", authenticateToken, async (req, res) => {
 });
 
 //upload image
-router.post("/upload", upload.single('file'), (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ error: true, message: "File upload failed" });
-    }
-    console.log(req.file);
-    return res.json({ error: false, message: "File uploaded successfully", file: req.file });
-});
+// router.post("/upload", upload.single('file'), (req, res) => {
+//     Cloth.create({image: req.file.filename})
+//     .then(result => res.json(result))
+//     .catch(err => console.log(err))
+
+//     // if (!req.file) {
+//     //     return res.status(400).json({ error: true, message: "File upload failed" });
+//     // }
+//     // // console.log(req.file);
+//     // return res.json({ error: false, message: "File uploaded successfully", file: req.file });
+// });
 
 module.exports = router;
