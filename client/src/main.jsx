@@ -15,6 +15,7 @@ import Cart from './components/Cart/Cart.jsx';
 import Login from './pages/Login/Login.jsx';
 import SignUp from './pages/Signup/SignUp.jsx';
 import Payement from './components/payment/Payement.jsx';
+import AddProduct from './components/AddProduct/AddProduct.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
         <Route path='user/:userid' element={<User />} />
         <Route path='showcard' element={<ShowCard />} />
         <Route path='payement' element={<Payement />} />
+        <Route path='addProduct' element={<AddProduct />} />
         <Route
           path='github'
           element={<Github />}

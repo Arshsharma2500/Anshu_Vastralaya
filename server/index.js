@@ -7,8 +7,6 @@ const connectDB = require('./DataBase/db.js');
 // connect to DataBase
 connectDB();
 
-const User = require("./models/user.model");
-const Cloth = require("./models/cloths.model");
 const authRoutes = require('./routes/authRoutes.js');
 const { authenticateToken } = require("./utilities");
 

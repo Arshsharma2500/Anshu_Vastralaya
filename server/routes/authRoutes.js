@@ -2,6 +2,8 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const { authenticateToken } = require("../utilities");
 const User = require("../models/user.model");
+const Cloth = require("../models/cloths.model");
+const { upload } = require('../middleware/multer.middleware');
 
 const router = express.Router(); // Create a new router instance
 
@@ -163,6 +165,15 @@ router.get("/get-clothes", authenticateToken, async (req, res) => {
             message: "Internal Server Error",
         });
     }
+});
+
+//upload image
+router.post("/upload", upload.single('file'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: true, message: "File upload failed" });
+    }
+    console.log(req.file);
+    return res.json({ error: false, message: "File uploaded successfully", file: req.file });
 });
 
 module.exports = router;

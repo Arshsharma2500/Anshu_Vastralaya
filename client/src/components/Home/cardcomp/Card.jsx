@@ -14,7 +14,7 @@ function Card({ product, addToCart }) {
       <p className="text-gray-500 mb-2">{description}</p>
       <p className="text-xl font-bold mb-4">₹ {price.toFixed(2)}</p>
       <button 
-        className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-200"
+        className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-700 transition duration-200"
         onClick={handleAddToCart}
       >
         Add to Cart

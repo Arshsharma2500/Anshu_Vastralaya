@@ -159,6 +159,12 @@ export default function Footer() {
                         </Link>
                     </div>
                 </div>
+
+                {/* dummy section to upload  */}
+                <div>
+                    <Link to={'/addProduct'}>Upload image</Link>
+                </div>
+
             </div>
         </footer>
     );
