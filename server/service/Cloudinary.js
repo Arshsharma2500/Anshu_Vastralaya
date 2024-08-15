@@ -1,55 +1,32 @@
-import { v2 as cloudinary } from 'cloudinary';
-import fs from "fs";
-import { PiNuclearPlantLight } from 'react-icons/pi';
+const cloudinary = require('cloudinary').v2; // Correct import
+const fs = require('fs');
+require('dotenv').config(); // Load environment variables
 
- // Configuration
+// Configuration
 cloudinary.config({ 
-    cloud_name: process.env.COUNDINARY_CLOUD_NAME, 
-    api_key: process.env.COUNDINARY_API_KEY, 
-    api_secret: process.env.COUNDINARY_API_SECRET 
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+    api_key: process.env.CLOUDINARY_API_KEY, 
+    api_secret: process.env.CLOUDINARY_API_SECRET 
 });
 
-const uploadOnCloudinary = async (loclaFilePath) => {
-    
-    try{
-        if(!loclaFilePath) return null
-        //upload the file on cloudinary
-        const uploadResult = await cloudinary.uploader.upload
-        (loclaFilePath, {
-                resource_type: "auto"
-            }
-        )
-        
-        .catch((error) => {
-            
-            console.log(error);
+const uploadOnCloudinary = async (localFilePath) => {
+    try {
+        if (!localFilePath) return null;
+
+        const uploadResult = await cloudinary.uploader.upload(localFilePath, {
+            resource_type: "auto"
         });
-        //file has been uploaded successfully
-        console.log("file has been uploaded successfully", uploadResult.url);
-        return uploadResult;
-    }
-    catch (error){
-        fs.unlinkSync(loclaFilePath) // remove the locally saved temporary file as the upload operation got failed
+
+        // Delete the local file after uploading
+        fs.unlinkSync(localFilePath);
+
+        console.log("File has been uploaded successfully:", uploadResult.url);
+        return uploadResult.url; // Return the URL of the uploaded image
+    } catch (error) {
+        console.error("Error uploading to Cloudinary:", error);
+        fs.unlinkSync(localFilePath); // Remove the locally saved file in case of error
         return null;
     }
- 
- // Optimize delivery by resizing and applying auto-format and auto-quality
-//  const optimizeUrl = cloudinary.url('shoes', {
-//      fetch_format: 'auto',
-//      quality: 'auto'
-//  });
- 
-//  console.log(optimizeUrl);
- 
- // Transform the image: auto-crop to square aspect_ratio
-//  const autoCropUrl = cloudinary.url('shoes', {
-//      crop: 'auto',
-//      gravity: 'auto',
-//      width: 500,
-//      height: 500,
-//  });
- 
-//  console.log(autoCropUrl);    
 };
 
-export {uploadOnCloudinary}
+module.exports = { uploadOnCloudinary };

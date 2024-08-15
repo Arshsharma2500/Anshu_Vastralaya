@@ -4,6 +4,7 @@ const { authenticateToken } = require("../utilities");
 const User = require("../models/user.model");
 const Cloth = require("../models/cloths.model");
 const { upload } = require('../middleware/multer.middleware');
+const {uploadOnCloudinary} = require("../service/Cloudinary");
 
 const router = express.Router(); // Create a new router instance
 
@@ -106,29 +107,24 @@ router.get("/get-user", authenticateToken, async (req, res) => {
 });
 
 // Add cloth route
-router.post("/upload", authenticateToken, upload.single('file'), async (req, res) => {
-    const { title, price, description } = req.body;
-    
-    if (!req.file) {
-        return res.status(400).json({ error: true, message: "Image is required" });
-    }
-    if (!title) {
-        return res.status(400).json({ error: true, message: "Title is required" });
-    }
-    if (!price) {
-        return res.status(400).json({ error: true, message: "Price is required" });
-    }
-    if (!description) {
-        return res.status(400).json({ error: true, message: "Description is required" });
-    }
-
+router.post("/upload", upload.single('file'), async (req, res) => {
     try {
+        const localFilePath = req.file.path;
+        const imageUrl = await uploadOnCloudinary(localFilePath);
+
+        if (!imageUrl) {
+            return res.status(500).json({ error: true, message: "Cloudinary upload failed" });
+        }
+
+        // Assuming you want to store other details like name, price, description
+        const { title, price, description } = req.body;
+
         const cloth = new Cloth({
-            img: req.file.filename,
+            img: imageUrl, // Store the Cloudinary URL
             title,
             price,
             description,
-            userId: req.user.user._id, // Use the user ID from the authenticated user
+            userId: req.user._id // Assuming the user is authenticated
         });
 
         await cloth.save();
@@ -136,9 +132,10 @@ router.post("/upload", authenticateToken, upload.single('file'), async (req, res
         return res.json({
             error: false,
             cloth,
-            message: "Product added successfully"
+            message: "Image uploaded and cloth added successfully"
         });
     } catch (error) {
+        console.error("Error in image upload route:", error);
         return res.status(500).json({
             error: true,
             message: "Internal Server Error",
@@ -148,10 +145,8 @@ router.post("/upload", authenticateToken, upload.single('file'), async (req, res
 
 // Get clothes route
 router.get("/get-clothes", authenticateToken, async (req, res) => {
-    const { user } = req.user;
-
     try {
-        const clothes = await Cloth.find({ userId: user._id });
+        const clothes = await Cloth.find({ userId: req.user._id });
 
         return res.json({
             error: false,
@@ -166,17 +161,6 @@ router.get("/get-clothes", authenticateToken, async (req, res) => {
     }
 });
 
-//upload image
-// router.post("/upload", upload.single('file'), (req, res) => {
-//     Cloth.create({image: req.file.filename})
-//     .then(result => res.json(result))
-//     .catch(err => console.log(err))
 
-//     // if (!req.file) {
-//     //     return res.status(400).json({ error: true, message: "File upload failed" });
-//     // }
-//     // // console.log(req.file);
-//     // return res.json({ error: false, message: "File uploaded successfully", file: req.file });
-// });
 
 module.exports = router;
